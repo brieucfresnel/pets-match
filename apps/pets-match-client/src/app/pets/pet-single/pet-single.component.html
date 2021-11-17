@@ -1,0 +1,25 @@
+<article *ngIf="pet$ | async as pet" class="pets-single">
+  <header class="pets-single__header">
+    <img class="pets-single__cover" [src]="pet.coverPictureUrl"
+         [alt]="'Image de couverture de' + pet.firstName + ' ' + pet.lastName "/>
+  </header>
+  <div class="pets-single__body">
+    <aside class="pets-single__aside">
+      <img class="pets-single__avatar" [src]="pet.avatarPictureUrl"
+           [alt]="'Avatar de' + pet.firstName + ' ' + pet.lastName"/>
+      <div class="pets-single__info">
+        <div class="pets-single__name"><span>Nom :</span> {{pet.firstName + ' ' + pet.lastName}}</div>
+        <div class="pets-single__type"><span>Type :</span> {{pet.type}}</div>
+        <div class="pets-single__birthdate"><span>Date de naissance :</span> {{pet.birthDate | date}}</div>
+      </div>
+      <div class="pets-single__controls">
+        <a class="btn btn--white" [routerLink]="['/pets/edit/', pet.id]">Modifier</a>
+      </div>
+    </aside>
+    <main class="pets-single__main">
+      {{pet.summary}}
+    </main>
+
+  </div>
+
+</article>

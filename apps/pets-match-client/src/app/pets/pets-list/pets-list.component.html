@@ -1,0 +1,7 @@
+<div class="pets-list">
+  <div class="container">
+    <div class="pets-list__list">
+      <pet-card *ngFor="let pet of pets$ | async; let i = index" [data]="pet"></pet-card>
+    </div>
+  </div>
+</div>

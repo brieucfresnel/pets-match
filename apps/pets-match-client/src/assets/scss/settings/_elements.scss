@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+}
+
+body {
+  background: #eee;
+}
+
+.container {
+  margin: 0 auto;
+}
+
+@media screen and (min-width: $screen-md) {
+  .container {
+    max-width: $container-md;
+  }
+}
+
+@media screen and (min-width: $screen-lg) {
+  .container {
+    max-width: $container-lg;
+  }
+}
+
+@media screen and (min-width: $screen-xl) {
+  .container {
+    max-width: $container-xl;
+  }
+}
+
+

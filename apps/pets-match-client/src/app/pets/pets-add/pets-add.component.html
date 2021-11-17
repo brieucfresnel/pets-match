@@ -1,0 +1,87 @@
+<div class="pets-add">
+  <h1 class="pets-add__title">Ajouter un animal</h1>
+  <form class="pets-add__form form" [formGroup]="formGroup" (ngSubmit)="save($event)">
+    <div class="form__group">
+      <label for="firstName" class="form__label">Prénom</label>
+      <input
+        id="firstName"
+        type="text"
+        class="form__input"
+        formControlName="firstName"
+        placeholder="Le prénom de l'animal"
+      />
+      <div *ngIf="submitted && formGroup.controls.firstName.errors as errors">
+        <div *ngIf="errors.required">Ce champ est requis</div>
+        <div *ngIf="errors.minlength">
+          Ce champ doit contenir au moins de {{errors.minlength.requiredLength }} caractères
+        </div>
+        <div *ngIf="errors.maxlength">
+          Ce champ doit contenir moins de {{errors.maxlength.requiredLength }} caractères
+        </div>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="lastName" class="form__label">Nom</label>
+      <input
+        id="lastName"
+        type="text"
+        class="form__input"
+        formControlName="lastName"
+        placeholder="Le nom de famille de l'animal"
+      />
+      <div *ngIf="submitted && formGroup.controls.lastName.errors as errors">
+        <div *ngIf="errors.required">Ce champ est requis</div>
+        <div *ngIf="errors.minlength">
+          Ce champ doit contenir au moins de {{errors.minlength.requiredLength }} caractères
+        </div>
+        <div *ngIf="errors.maxlength">
+          Ce champ doit contenir moins de {{errors.maxlength.requiredLength }} caractères
+        </div>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="type" class="form__label">Type</label>
+      <input id="type" type="text" class="form__input" formControlName="type" placeholder="Le type (rabbit, ...)"/>
+      <div *ngIf="submitted && formGroup.controls.type.errors?.required" class="form__error">
+        Ce champ est requis
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="birthDate" class="form__label">Date de naissance</label>
+      <input id="birthDate" type="date" class="form__input" formControlName="birthDate"/>
+      <div *ngIf="submitted && formGroup.controls.birthDate.errors?.required" class="form__error">
+        Ce champ est requis
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="avatar" class="form__label">Avatar</label>
+      <input id="avatar" type="file" class="form__input" formControlName="avatar"/>
+      <div *ngIf="submitted && formGroup.controls.avatar.errors?.required" class="form__error">
+        Ce champ est requis
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="coverPicture" class="form__label">Image de couverture</label>
+      <input id="coverPicture" type="file" class="form__input" formControlName="coverPicture"/>
+      <div *ngIf="submitted && formGroup.controls.coverPicture.errors?.required" class="form__error">
+        Ce champ est requis
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="summary" class="form__label">Résumé</label>
+      <textarea id="summary" class="form__input" formControlName="summary" rows="10"
+                placeholder="Décrivez votre animal"></textarea>
+      <div *ngIf="submitted && formGroup.controls.summary.errors?.required" class="form__error">
+        Ce champ est requis
+      </div>
+    </div>
+
+    <button class="form__submit btn" type="submit" value="Inscription">Ajouter l'animal</button>
+  </form>
+</div>

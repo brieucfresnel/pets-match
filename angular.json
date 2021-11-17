@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "projects": {
+    "pets-match-api": {
+      "root": "apps/pets-match-api",
+      "sourceRoot": "apps/pets-match-api/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/pets-match-api",
+            "main": "apps/pets-match-api/src/main.ts",
+            "tsConfig": "apps/pets-match-api/tsconfig.app.json",
+            "assets": ["apps/pets-match-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/pets-match-api/src/environments/environment.ts",
+                  "with": "apps/pets-match-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "pets-match-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/pets-match-api/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pets-match-api"],
+          "options": {
+            "jestConfig": "apps/pets-match-api/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "pets-match-client": {
+      "projectType": "application",
+      "root": "apps/pets-match-client",
+      "sourceRoot": "apps/pets-match-client/src",
+      "prefix": "pets-match",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/pets-match-client",
+            "index": "apps/pets-match-client/src/index.html",
+            "main": "apps/pets-match-client/src/main.ts",
+            "polyfills": "apps/pets-match-client/src/polyfills.ts",
+            "tsConfig": "apps/pets-match-client/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/pets-match-client/src/favicon.ico",
+              "apps/pets-match-client/src/assets"
+            ],
+            "styles": ["apps/pets-match-client/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/pets-match-client/src/environments/environment.ts",
+                  "with": "apps/pets-match-client/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "pets-match-client:build:production"
+            },
+            "development": {
+              "browserTarget": "pets-match-client:build:development",
+              "proxyConfig": "apps/pets-match-client/proxy.conf.json"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pets-match-client:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pets-match-client/src/**/*.ts",
+              "apps/pets-match-client/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pets-match-client"],
+          "options": {
+            "jestConfig": "apps/pets-match-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "pets-match-client-e2e": {
+      "root": "apps/pets-match-client-e2e",
+      "sourceRoot": "apps/pets-match-client-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pets-match-client-e2e/cypress.json",
+            "devServerTarget": "pets-match-client:serve:development",
+            "tsConfig": "apps/pets-match-client-e2e/tsconfig.json"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pets-match-client:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/pets-match-client-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["pets-match-client"]
+    },
+    "pets-match-resources": {
+      "root": "libs/pets-match-resources",
+      "sourceRoot": "libs/pets-match-resources/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/pets-match-resources/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/pets-match-resources"],
+          "options": {
+            "jestConfig": "libs/pets-match-resources/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    }
+  }
+}

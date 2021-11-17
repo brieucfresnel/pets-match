@@ -1,0 +1,25 @@
+.navbar {
+  background-color: $primary;
+  padding: 20px 0;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__brand {
+    color: #FFF;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  &__menu {
+    display: flex;
+    column-gap: 10px;
+  }
+
+  &__link {
+    color: $white;
+  }
+}

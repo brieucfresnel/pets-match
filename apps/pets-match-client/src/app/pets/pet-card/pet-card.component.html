@@ -1,0 +1,26 @@
+<article *ngIf="data" class="pet-card">
+  <div class="pet-card__avatar-container">
+    <img class="pet-card__avatar" [src]="data.avatarPictureUrl"
+         [alt]="'Avatar de ' + data.firstName + ' ' + data.lastName "/>
+  </div>
+  <div class="pet-card__content">
+    <div class="pet-card__header">
+      <div class="pet-card__name">{{data.firstName}} {{data.lastName}} </div>
+    </div>
+
+    <div class="pet-card__body">
+      <div class="pet-card__meta">
+        <div class="pet-card__birthdate">Né le {{data.birthDate}}</div>
+        <div class="pet-card__type">Type : {{data.type}}</div>
+      </div>
+
+      <div class="pet-card__summary">
+        <p>{{data.summary | slice: 0 : 100}}<span *ngIf="data.summary.length > 100">[...]</span></p>
+        <div class="pet-card__know-more">
+          <a [routerLink]="['/pets/pet/', data.id]" class="btn btn--primary">En savoir plus</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</article>
